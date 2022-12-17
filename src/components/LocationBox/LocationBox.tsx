@@ -21,6 +21,7 @@ const LocationBox: React.FC = () => {
     if (lastLocationId && shouldReload) {
       service.fetchLocation({ lastLocationId, getLocation, setLocation, setShouldReload })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastLocationId, shouldReload])
 
   return (

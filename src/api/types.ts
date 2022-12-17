@@ -1,4 +1,4 @@
-import { Location } from 'components/Location'
+import { Location } from 'components/Location/types'
 
 export interface GetLocationsIdData {
   locations: Pick<Location, 'id'>[]

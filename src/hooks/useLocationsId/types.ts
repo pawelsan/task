@@ -1,6 +1,6 @@
-import { Location } from 'components/Location'
+import { LocationType } from 'components/Location'
 
 export interface UseLocationsIdProps {
-  lastLocationId: Location['id'] | undefined
+  lastLocationId: LocationType['id'] | undefined
   getLocationsIdLoading: boolean
 }

@@ -19,7 +19,8 @@ const useLocationsId = (): UseLocationsIdProps => {
         setLocationsId(ids)
       }
     })
-  }) // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (locationsId.length > 0) {

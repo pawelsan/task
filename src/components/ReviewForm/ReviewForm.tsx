@@ -2,14 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Form, formDefault } from './types'
 import { SEND_REVIEW } from 'api'
 import { useMutation } from '@apollo/client'
-import { ReviewShape } from 'components/Reviews'
 import { LocationBoxContext } from 'contexts/LocationBoxContext'
 import './ReviewForm.scss'
 
 const ReviewForm: React.FC = () => {
   const { setShouldReload } = useContext(LocationBoxContext)
   const [review, setReview] = useState<Form>(formDefault)
-
   const [sendReview, { loading: sendReviewLoading }] = useMutation(SEND_REVIEW)
 
   const setValue = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -18,7 +16,7 @@ const ReviewForm: React.FC = () => {
   const onSend = () => {
     const { id, comment, rating } = review
     sendReview({ variables: { id, comment, rating: parseInt(rating, 10) } }).then(res => {
-      if (res.data?.success) {
+      if (res.data?.submitReview?.success) {
         setShouldReload(true)
       }
     })
@@ -41,6 +39,9 @@ const ReviewForm: React.FC = () => {
         <label htmlFor='rating'>Rating: </label>
         <input
           id='rating'
+          type='number'
+          min='0'
+          max='10'
           value={review.rating}
           onChange={setValue}
         />
@@ -55,7 +56,16 @@ const ReviewForm: React.FC = () => {
         />
       </div>
 
-      {sendReviewLoading ? <button onClick={onSend}>Send</button> : 'Sending...'}
+      {!sendReviewLoading ? (
+        <button
+          onClick={onSend}
+          disabled={!review.rating}
+        >
+          Send
+        </button>
+      ) : (
+        'Sending...'
+      )}
     </div>
   )
 }
