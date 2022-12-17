@@ -1,2 +1,1 @@
-# task
-Created with CodeSandbox
+# recruitment-homework-react-ts
